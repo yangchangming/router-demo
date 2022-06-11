@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Z</title>
+</head>
+<body>
+    <div id="nav" class="nav">
+        <a href="javascript:;" onclick="route.go('/')">首页</a>
+        <a href="javascript:;" onclick="route.go('/case')">案例</a>
+        <a href="javascript:;" onclick="route.go('/tools')">工具</a>
+        <a href="javascript:;" onclick="route.go('/idea')">点子</a>
+        <a href="javascript:;" onclick="route.go('/member')">会员</a>
+    </div>
+    <div id="content"></div>
+
+    <script src="../asset/router.js"></script>
+    <script src="../asset/router01.js"></script>
+    <script language="JavaScript">
+        var config = {
+            routerViewId: '#routerView',  // 路由切换的挂载点 id
+            stackPages: true,             // 多级页面缓存
+            animationName: "slide",
+            routes: [
+                {
+                    path: "/home",
+                    name: "home",
+                    callback: function(transition) {
+                        home()
+                    }
+                }
+            ]
+        }
+
+  // 1：初始化 Router.init(config)
+  // 2：跳转  onclick='linkTo(\"#/list\")'
+    </script>
+</body>
+</html>
