@@ -1,39 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Z</title>
+    <title>route 2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <link rel="stylesheet" href="../asset/app.css">
 </head>
+
 <body>
+
     <div id="nav" class="nav">
-        <a href="javascript:;" onclick="route.go('/')">首页</a>
-        <a href="javascript:;" onclick="route.go('/case')">案例</a>
-        <a href="javascript:;" onclick="route.go('/tools')">工具</a>
-        <a href="javascript:;" onclick="route.go('/idea')">点子</a>
-        <a href="javascript:;" onclick="route.go('/member')">会员</a>
+        <a href="javascript:;" onclick="linkTo('/index')">首页</a>
+        <a href="javascript:;" onclick="linkTo('/case')">案例</a>
+        <a href="javascript:;" onclick="linkTo('/tools')">工具</a>
+        <a href="javascript:;" onclick="linkTo('/idea')">点子</a>
+        <a href="javascript:;" onclick="linkTo('/member')">会员</a>
     </div>
+
     <div id="content"></div>
 
-    <script src="../asset/router.js"></script>
-    <script src="../asset/router01.js"></script>
-    <script language="JavaScript">
-        var config = {
-            routerViewId: '#routerView',  // 路由切换的挂载点 id
-            stackPages: true,             // 多级页面缓存
-            animationName: "slide",
-            routes: [
-                {
-                    path: "/home",
-                    name: "home",
-                    callback: function(transition) {
-                        home()
-                    }
-                }
-            ]
-        }
+<script type="text/javascript" src="../asset/router.js"></script>
+<script type="text/javascript">
+    var config = {
+        routerViewId: 'routerView',         // 路由切换的挂载点 id
+        stackPages: true,                   // 多级页面缓存
+        animationName: "fade",              // 切换页面时的动画
+        routes: [{
+            path: "/index",
+            name: "index",
+            callback: function(currentHash) {
+                console.log('开始执行页面路由内容的渲染...:', currentHash)
+                document.getElementById("content").innerHTML = "index";
+            },
+            beforeFilter: login,
+            afterFilter: clear
+        }, {
+            path: "/case",
+            name: "case",
+            callback: function(currentHash) {
+                console.log('case:', currentHash);
+                document.getElementById("content").innerHTML = "case";
+            }
+        }, {
+            path: "/tools",
+            name: "tools",
+            callback: function(currentHash) {
+                console.log('tools:', currentHash)
+                document.getElementById("content").innerHTML = "tools";
+            }
+        }, {
+            path: "/idea",
+            name: "idea",
+            callback: function(currentHash) {
+                console.log('idea:', currentHash)
+                document.getElementById("content").innerHTML = "idea";
+            }
+        }, {
+            path: "/member",
+            name: "member",
+            callback: function(currentHash) {
+                console.log('member:', currentHash)
+                document.getElementById("content").innerHTML = "member";
+            }
+        }]
+    }
+    router.init(config)
 
-  // 1：初始化 Router.init(config)
-  // 2：跳转  onclick='linkTo(\"#/list\")'
-    </script>
+    router.commonBeforeFilter(function() {
+        console.log('执行公共前置过滤器...');
+        //todo 公共过滤器逻辑
+    })
+    router.commonAfterFilter(function() {
+        console.log("执行公共后置过滤器...");
+        //todo 公共过滤器逻辑
+    })
+
+    // rem 单位适配
+    // let width = window.screen.width;
+    // document.getElementsByTagName('html')[0].style.fontSize = width / 9.5 + 'px';
+
+
+    function login(){
+        console.log('login ....')
+    }
+
+    function clear(){
+        console.log('clear...')
+    }
+
+
+</script>
 </body>
 </html>
